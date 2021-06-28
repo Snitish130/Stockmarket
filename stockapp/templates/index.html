@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div>
+    <div class="container pt-4">
+        <div class="row p-0 mt-4">
+            <div class="col-lg-4 mx-auto shadow p-0 h-50 ">
+                <div class="alert alert-primary">
+                    <h2>List Your Stock</h2>
+                </div>
+                <div class="p-4">
+                    <form method="POST" action="/add-stock">
+                        {% csrf_token %}
+                        {{form.as_p}}
+                        <hr>
+                        <input class="btn btn-primary" type="submit" value="Add">
+                    </form>
+                </div>
+            </div>
+            <div class="col">
+                <div class="border">
+                    {% if stocks|length == 0 %}
+                    <br><br>
+                    <div class="p-4">
+                        <div class="alert alert-primary text-center">
+                            <p class="display-4">No Stock</p>
+                        </div>
+                    </div>
+                    <br><br>
+
+                    {% else %}
+
+                    <div>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>NAME</th>
+                                    <th>INDUSTRY</th>
+                                    <th>MCAP (₹ CR)</th> 
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for stock in stocks %}
+                                <tr>
+                                    
+                                    <td>{{forloop.counter}}</td>
+                                    <td><a href="/stock/{{stock.slug}}" >{{stock.name}}</a></td>
+                                    <td>{{stock.industry}}</td>
+                                    <td>{{stock.mcap}}</td>     
+                                </tr>
+                                
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+{% endblock %}
