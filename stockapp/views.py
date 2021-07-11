@@ -4,7 +4,7 @@ from django.contrib.auth.forms import UserCreationForm , AuthenticationForm
 from stockapp.forms import StockForm
 from stockapp.models import StockList
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import HttpResponse
+from django.shortcuts import HttpResponse 
 import xlwt
 
 @login_required(login_url='login')
